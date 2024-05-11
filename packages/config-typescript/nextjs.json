@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "allowJs": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es5"
+    /* "paths": {
+      "@/*": ["./*"],
+      "@fakestore/ui/*": ["../../packages/cww-ui/*"],
+      "@fakestore/ui/components/*": ["../../packages/cww-ui/components/*"],
+      "@fakestore/ui/components/ui/*": ["../../packages/cww-ui/components/ui/*"],
+      "@fakestore/ui/lib/*": ["../../packages/cww-ui/lib/*"]
+    } */
+  },
+  "include": ["src", "next-env.d.ts"],
+  "exclude": ["node_modules"]
+}
