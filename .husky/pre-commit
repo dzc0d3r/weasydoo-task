@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 turbo test
-npx lint-staged
+pnpx lint-staged
