@@ -1,6 +1,8 @@
 module.exports = {
   extends: ["@fakestore/eslint-config/next.js"],
+  ignorePatterns: ["*.config.js", "*.config.ts", ".eslintrc.js"],
   parserOptions: {
-    project: "apps/web/tsconfig.json",
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname, 
   },
 };

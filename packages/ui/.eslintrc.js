@@ -3,7 +3,8 @@ module.exports = {
   extends: ["@fakestore/eslint-config/react.js"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "packages/ui/tsconfig.lint.json",
+    project: "./tsconfig.lint.json",
+    tsconfigRootDir: __dirname,
   },
   ignorePatterns: ["*.config.js", "*.config.ts"],
   
