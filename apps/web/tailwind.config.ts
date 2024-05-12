@@ -4,7 +4,7 @@ import type { Config } from "tailwindcss";
 import uiConfig from "@fakestore/ui/tailwind.config";
 
 const config: Pick<Config, "content" | "presets"> = {
-  content: ["./src/app/**/*.tsx"],
+  content: ["./src/**/*.tsx"],
   presets: [uiConfig],
 };
 

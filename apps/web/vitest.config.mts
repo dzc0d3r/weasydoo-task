@@ -8,6 +8,9 @@ export default defineConfig({
     coverage: {
        include: ['src/componens/**/*']
     },
+    alias: {
+      '@/': new URL('./src/', import.meta.url).pathname, 
+    }
   },
 
 })
