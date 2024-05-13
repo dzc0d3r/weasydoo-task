@@ -10,7 +10,7 @@ export default async function Page(): Promise<JSX.Element> {
 
 
   return (
-    <main className="min-h-screen grid place-content-center">
+    <main className="container mx-auto relative min-h-screen">
       <div>
         <p>{JSON.stringify(session)}</p>
         <p>{session?.sessionToken?.name}</p>
