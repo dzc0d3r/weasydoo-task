@@ -1,5 +1,9 @@
 import Link from "next/link"
-import { CircleUser, AlignLeft, Search } from "lucide-react"
+import { 
+  CircleUser, AlignLeft, Search,
+  Shield , Settings,ShoppingCart,
+  LogOut}
+from "lucide-react"
 import { Button } from "@fakestore/ui/components/button"
 import {
   DropdownMenu,
@@ -12,14 +16,18 @@ import { Input } from "@fakestore/ui/components/input"
 import { Sheet, SheetContent, SheetTrigger } from "@fakestore/ui/components/sheet"
 import Image from "next/image"
 import Logo from "../../../public/logo.png"
+import LoginButton from "./login-button"
 import { auth, signOut } from "@/auth"
 
 
+
 export default async function NaVBar(): Promise<JSX.Element> {
+ 
+  
   const session = await auth()
   
   return (
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link
             
@@ -106,6 +114,12 @@ export default async function NaVBar(): Promise<JSX.Element> {
               />
             </div>
           </form>
+          <div className="relative flex items-center gap-4 flex-row">
+            <ShoppingCart />
+            <span className="absolute -top-3 -right-1 bg-red-500 rounded-full w-4 h-4 text-[.7rem] text-white font-medium flex items-center justify-center" >
+              1
+            </span>
+          </div>
           {session ? (
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -114,16 +128,16 @@ export default async function NaVBar(): Promise<JSX.Element> {
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-36 p-5">
-              <Button className="w-full" type="submit" variant="ghost">
-                    Settings
+            <DropdownMenuContent align="end" className="w-44 p-5">
+              <Button className="relative lg:text-md font- w-full flex flex-row gap-4" type="submit" variant="ghost">
+                    <Settings className="absolute left-2" /> Settings
               </Button>
               <DropdownMenuSeparator />
               
               {session.user.role === "admin" && (
                 <Link href="/dashboard">
-                  <Button className="w-full" type="submit" variant="ghost">
-                    Admin
+                  <Button className="relative lg:text-md font- w-full flex flex-row gap-4" type="submit" variant="ghost">
+                    <Shield className="absolute left-2" /> Admin
                   </Button>
                   
                   
@@ -137,20 +151,17 @@ export default async function NaVBar(): Promise<JSX.Element> {
                     await signOut();
                  }}
               >
-              <Button className="w-full" type="submit" variant="destructive">
-                Logout
+              <Button className="w-full relative" type="submit" variant="destructive">
+                <LogOut className="absolute left-3" /> Logout
               </Button>
               </form>
               
             </DropdownMenuContent>
           </DropdownMenu>
           ) : (
-            <Link href="/login">
-              <Button>
-                Login
-              </Button>    
-            </Link>
+            <LoginButton />
           ) }
+          
           
           
         </div>

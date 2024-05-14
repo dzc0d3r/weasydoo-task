@@ -9,6 +9,7 @@ import {redirect} from "next/navigation"
 import LoginForm from "./_components/login-form"
 import {auth} from "@/auth"
 
+
 export default async function Page(): Promise<JSX.Element> {
   const session = await auth()
   if (session) {

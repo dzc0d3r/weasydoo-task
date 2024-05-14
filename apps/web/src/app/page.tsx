@@ -1,27 +1,20 @@
+import type { Product } from "product";
+import SingleProduct from "@/components/product";
 
-import { Button } from "@fakestore/ui/components/button";
-import {auth} from "@/auth"
-
-
-
-
-export default async function Page(): Promise<JSX.Element> {
-  const session = await auth()
-
+export default async function Home(): Promise<JSX.Element> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+  const products  = await res.json() as Product[];
 
   return (
-    <main className="container mx-auto relative min-h-screen">
-      <div>
-        <p>{JSON.stringify(session)}</p>
-        <p>{session?.sessionToken?.name}</p>
-        <h2 className="text-3xl m-5">
-          web using shared ui packages (via shadcn)
-        </h2>
-        <Button className="flex mx-auto"> Great</Button>
-      </div>
-      
-      
+    <main className="min-h-screen container max-w-6xl mx-auto px-8 xl:px-0 mt-10">
+      <section className="flex flex-col space-y-12 pb-44">
+        <h1 className="text-4xl font-semibold text-center">Trending</h1>
+        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  xl:gap-x-8">
+          {products.map((product) => (
+            <SingleProduct key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
     </main>
-
   );
 }

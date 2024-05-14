@@ -15,9 +15,11 @@ import {
   FormMessage,
 } from "@fakestore/ui/components/form"
 import { signIn } from "next-auth/react"
+import { useSearchParams } from "next/navigation"
 
 interface LoginFormProps {
-  closeModal?: () => void
+  closeModal?: () => void,
+  backURL?: string
 }
 
 
@@ -27,22 +29,27 @@ const formSchema = z.object({
 })
 
 export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
+  const searchParams = useSearchParams()   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      password: ""
+      password: "",
+      
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>): void {
+  async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
     
-
-
     await signIn("credentials", {
       username: values.username,
-      password: values.password
+      password: values.password,
+      callbackUrl: searchParams.get("url") || "/",
+      
+      
     })
+    
+    
   }
   return (
     <Form {...form}>
