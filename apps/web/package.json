@@ -12,14 +12,17 @@
   },
   "dependencies": {
     "@fakestore/ui": "workspace:*",
+    "@hookform/resolvers": "^3.3.4",
     "lucide-react": "^0.294.0",
     "next": "^14.1.1",
     "next-auth": "5.0.0-beta.18",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@fakestore/eslint-config": "workspace:*",
+    "@fakestore/eslint-config": "workspace:^",
     "@fakestore/tailwind-config": "workspace:*",
     "@fakestore/typescript-config": "workspace:*",
     "@next/eslint-plugin-next": "^14.1.1",

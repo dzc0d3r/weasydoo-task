@@ -1,30 +1,40 @@
-
 import Link from "next/link"
-import { CircleUser, AlignLeft, Package2, Search } from "lucide-react"
+import { CircleUser, AlignLeft, Search } from "lucide-react"
 import { Button } from "@fakestore/ui/components/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
+
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@fakestore/ui/components/dropdown-menu"
 import { Input } from "@fakestore/ui/components/input"
 import { Sheet, SheetContent, SheetTrigger } from "@fakestore/ui/components/sheet"
-import {auth} from "@/auth"
+import Image from "next/image"
+import Logo from "../../../public/logo.png"
+import { auth, signOut } from "@/auth"
+
 
 export default async function NaVBar(): Promise<JSX.Element> {
   const session = await auth()
+  
   return (
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link
             
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
-            href="#"
+            href="/"
           >
-            <Package2 className="h-6 w-6" />
+            
+            <Image
+              alt="FakeStore Inc"
+              height={95}
+              placeholder="blur"
+              src={Logo}
+              width={95}
+            
+            />
             <span className="sr-only">Acme Inc</span>
           </Link>
           <Link
@@ -55,13 +65,20 @@ export default async function NaVBar(): Promise<JSX.Element> {
             <nav className="grid gap-6 text-lg font-medium">
               <Link
                 className="flex items-center gap-2 text-lg font-semibold"
-                href="#"
+                href="/"
               >
-                <Package2 className="h-6 w-6" />
+                <Image
+                alt="FakeStore Inc"
+                height={50}
+                placeholder="blur"
+                src={Logo}
+                width={50}
+              />
                 <span className="sr-only">Acme Inc</span>
               </Link>
               
-              <Link
+              <div className="grid gap-4 mt-5">
+                <Link
                 className="text-muted-foreground hover:text-foreground"
                 href="/about"
               >
@@ -73,6 +90,7 @@ export default async function NaVBar(): Promise<JSX.Element> {
               >
                 Privacy
               </Link>
+              </div>
               
             </nav>
           </SheetContent>
@@ -97,16 +115,33 @@ export default async function NaVBar(): Promise<JSX.Element> {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-36 p-5">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <Button className="w-full" type="submit" variant="ghost">
+                    Settings
+              </Button>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              
               {session.user.role === "admin" && (
                 <Link href="/dashboard">
-                  <DropdownMenuItem>Admin</DropdownMenuItem>
+                  <Button className="w-full" type="submit" variant="ghost">
+                    Admin
+                  </Button>
+                  
+                  
                 </Link>
               )}
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <form
+              
+              action={async (): void =>  {
+                    "use server";
+                    await signOut();
+                 }}
+              >
+              <Button className="w-full" type="submit" variant="destructive">
+                Logout
+              </Button>
+              </form>
+              
             </DropdownMenuContent>
           </DropdownMenu>
           ) : (

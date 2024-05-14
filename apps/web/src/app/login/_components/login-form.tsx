@@ -1,58 +1,113 @@
-import Link from "next/link"
-import { Button } from "@fakestore/ui/components/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@fakestore/ui/components/card"
+"use client"
 import { Input } from "@fakestore/ui/components/input"
-import { Label } from "@fakestore/ui/components/label"
+import { Button } from "@fakestore/ui/components/button"
+import Link from "next/link"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import {
+  Form,
+  FormControl,
 
-export default function LoginForm(): JSX.Element {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@fakestore/ui/components/form"
+import { signIn } from "next-auth/react"
+
+interface LoginFormProps {
+  closeModal?: () => void
+}
+
+
+const formSchema = z.object({
+  username: z.string().min(4).max(50),
+  password: z.string().min(4).max(50),
+})
+
+export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      password: ""
+    },
+  })
+
+  async function onSubmit(values: z.infer<typeof formSchema>): void {
+    
+
+
+    await signIn("credentials", {
+      username: values.username,
+      password: values.password
+    })
+  }
   return (
-    <Card className="w-96 max-w-sm">
-      <CardHeader className="">
-        <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription>
-          Enter your credentials to login to your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              required
-              type="email"
-            />
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
-              <Link className="ml-auto inline-block text-sm underline" href="#">
-                Forgot your password?
-              </Link>
-            </div>
-            <Input id="password" required type="password" />
-          </div>
-          <Button className="w-full" type="submit">
-            Login
-          </Button>
-          <Button className="w-full" variant="outline">
-            Login with Google
-          </Button>
-        </div>
-        <div className="mt-4 text-center text-sm">
+    <Form {...form}>
+
+
+      <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+
+
+
+
+
+
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your username" {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your password" {...field} type="password" />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full" type="submit">
+          Login
+        </Button>
+
+        <div className="mt-4 text-center text-sm" >
           Don&apos;t have an account?{" "}
           <Link className="underline" href="/signup">
-            Sign up
+            <Button
+              onClick={closeModal}
+              variant="link"
+            >
+              Sign up
+            </Button>
           </Link>
         </div>
-      </CardContent>
-    </Card>
+
+
+
+      </form>
+
+
+    </Form>
   )
+
+
 }
 

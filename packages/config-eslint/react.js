@@ -37,7 +37,8 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
-    "jsx-a11y/heading-has-content": "off"
+    "jsx-a11y/heading-has-content": "off",
+    "@typescript-eslint/no-unnecessary-condition": "warn",
   },
   overrides: [
     {

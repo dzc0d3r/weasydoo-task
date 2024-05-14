@@ -1,4 +1,5 @@
-import type { User, Session } from "next-auth";
+  
+import type { User, Session, NextAuthConfig } from "next-auth";
 import type { JWT } from "next-auth/jwt"
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -8,8 +9,12 @@ interface LoginResponse {
   token: JWT | null;
 }
 
+const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const authOptions = {
+  pages: {
+    signIn: '/login'
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -19,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials, _req) {
         try {
-          const response = await fetch('https://fakestoreapi.com/auth/login',{
+          const response = await fetch(url,{
             method:'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -84,4 +89,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
 }
 
-});
+} satisfies NextAuthConfig
+export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);

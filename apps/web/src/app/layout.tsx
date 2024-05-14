@@ -3,8 +3,8 @@ import "@fakestore/ui/dist/globals.css";
 import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import  NavBar  from "@/components/navbar/nav-bar";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,16 +16,23 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   login,
+  signup,
 }: {
   children: React.ReactNode;
   login: React.ReactNode;
+  signup: React.ReactNode;
 }): JSX.Element {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
-        {children}
-        {login}
+        <SessionProvider>
+          <NavBar />
+          {children}
+          {login}
+          {signup}
+
+        </SessionProvider>
+        
       </body>
     </html>
   );

@@ -43,6 +43,7 @@ module.exports = {
     "import/no-default-export": "off",
     "no-html-link-for-pages": "off",
     "import/no-unresolved": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
     /* "@typescript-eslint/explicit-function-return-type": "warn", */
   },
 };
