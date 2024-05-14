@@ -24,12 +24,13 @@ interface LoginFormProps {
 
 
 const formSchema = z.object({
-  username: z.string().min(4).max(50),
-  password: z.string().min(4).max(50),
+  username: z.string().min(4, {message: "Username must be at least 4 characters long"}).max(50),
+  password: z.string().min(4, {message: "Password must be at least 4 characters long"}).max(50),
 })
 
 export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
-  const searchParams = useSearchParams()   
+  const searchParams = useSearchParams()
+  const redirectTo = `/${searchParams.get("url") ?? "/"}`
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,9 +45,8 @@ export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
     await signIn("credentials", {
       username: values.username,
       password: values.password,
-      callbackUrl: searchParams.get("url") || "/",
-      
-      
+      callbackUrl: redirectTo || "/",
+         
     })
     
     
@@ -72,7 +72,7 @@ export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
                 <Input placeholder="Enter your username" {...field} />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="text-red-500 animate-pulse text-sm" />
             </FormItem>
           )}
         />
@@ -87,7 +87,7 @@ export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
                 <Input placeholder="Enter your password" {...field} type="password" />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="text-red-500 animate-pulse text-sm" />
             </FormItem>
           )}
         />

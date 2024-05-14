@@ -1,14 +1,21 @@
 import type { Product } from "product";
+import React from "react";
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@fakestore/ui/components/button";
 import SingleProduct from "@/components/product";
+import HeroImage from "~/public/hero.png"
 
 export default async function Home(): Promise<JSX.Element> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
   const products  = await res.json() as Product[];
 
   return (
-    <main className="min-h-screen container max-w-6xl mx-auto px-8 xl:px-0 mt-10">
+    <main className="min-h-screen container max-w-6xl mx-auto px-8 xl:px-0 ">
+      <HeroSection />
+      
       <section className="flex flex-col space-y-12 pb-44">
-        <h1 className="text-4xl font-semibold text-center">Trending</h1>
+        <h1 className="text-4xl font-semibold text-center text-primary/85">Trending Today</h1>
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  xl:gap-x-8">
           {products.map((product) => (
             <SingleProduct key={product.id} product={product} />
@@ -17,4 +24,28 @@ export default async function Home(): Promise<JSX.Element> {
       </section>
     </main>
   );
+}
+
+export function HeroSection(): JSX.Element {
+  return (
+    <section className="py-2">
+        <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between">
+            <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0">
+                <h1 className="text-4xl md:text-5xl font-bold text-primary/90 leading-tight">Discover Your Style</h1>
+                <p className="mt-4 text-primary/60 text-lg">Find the perfect outfit for any occasion with our latest collection. 
+            Whether you&apos;re dressing up for a special event or keeping it casual,
+            we have the styles you need to look and feel your best.any occasion with our latest collection.</p>
+                <Link className="mt-5  flex flex-row items-center" href="/products">
+                  <Button className="p-7 font-bold text-xl" size="default">Shop Now</Button>
+                </Link>
+            </div>
+            <div className="lg:w-1/3">
+                <Image 
+                alt="Shop Hero Image"
+                className="hidden lg:flex rounded-md"
+                 placeholder="blur"  src={HeroImage} />
+            </div>
+        </div>
+    </section>
+  )
 }

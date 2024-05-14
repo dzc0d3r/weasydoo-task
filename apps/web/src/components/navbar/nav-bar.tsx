@@ -8,7 +8,7 @@ import { Button } from "@fakestore/ui/components/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-
+  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@fakestore/ui/components/dropdown-menu"
@@ -27,8 +27,8 @@ export default async function NaVBar(): Promise<JSX.Element> {
   const session = await auth()
   
   return (
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+      <header className="sticky backdrop-blur-lg bg-white backdrop-filter  bg-opacity-80 top-0 shadow-sm flex h-16 items-center gap-4 px-4 md:px-6 z-50">
+        <nav className="hidden flex-col gap-2 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-2">
           <Link
             
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
@@ -37,25 +37,26 @@ export default async function NaVBar(): Promise<JSX.Element> {
             
             <Image
               alt="FakeStore Inc"
-              height={95}
+              height={120}
               placeholder="blur"
               src={Logo}
-              width={95}
+              width={120}
+            
             
             />
             <span className="sr-only">Acme Inc</span>
           </Link>
           <Link
-                className="text-muted-foreground hover:text-foreground"
+                className="text-primary/80 hover:text-foreground"
                 href="/about"
               >
-                About
+                <Button variant="ghost">About</Button>
           </Link>
           <Link
-            className="text-muted-foreground hover:text-foreground"
+            className="text-primary/80 hover:text-foreground"
             href="privacy"
           >
-            Privacy
+            <Button variant="ghost">Privacy</Button>
           </Link>
         </nav>
         <Sheet>
@@ -87,13 +88,13 @@ export default async function NaVBar(): Promise<JSX.Element> {
               
               <div className="grid gap-4 mt-5">
                 <Link
-                className="text-muted-foreground hover:text-foreground"
+                className="text-primary/80 hover:text-foreground"
                 href="/about"
               >
                 About
               </Link>
               <Link
-                className="text-muted-foreground hover:text-foreground"
+                className="text-primary/80 hover:text-foreground"
                 href="privacy"
               >
                 Privacy
@@ -129,19 +130,23 @@ export default async function NaVBar(): Promise<JSX.Element> {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-44 p-5">
-              <Button className="relative lg:text-md font- w-full flex flex-row gap-4" type="submit" variant="ghost">
-                    <Settings className="absolute left-2" /> Settings
-              </Button>
-              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="hover:cursor-pointer outline-none ">
+                    <Link className="flex flex-row gap-2 lg:text-md w-full font-medium" href="/profile" >
+                    <Settings className=" left-2" /> Settings
+                    </Link>
+                </DropdownMenuItem>
               
               {session.user.role === "admin" && (
-                <Link href="/dashboard">
-                  <Button className="relative lg:text-md font- w-full flex flex-row gap-4" type="submit" variant="ghost">
-                    <Shield className="absolute left-2" /> Admin
-                  </Button>
+                
+                
                   
+                <DropdownMenuItem asChild className="hover:cursor-pointer outline-none ">
+                    <Link className="flex flex-row gap-2 lg:text-md w-full font-medium" href="/dashboard" >
+                    <Shield className=" left-2" /> Admin
+                    </Link>
+                </DropdownMenuItem>
                   
-                </Link>
+                
               )}
               <DropdownMenuSeparator />
               <form
@@ -151,7 +156,7 @@ export default async function NaVBar(): Promise<JSX.Element> {
                     await signOut();
                  }}
               >
-              <Button className="w-full relative" type="submit" variant="destructive">
+              <Button className="w-full relative" size="sm" type="submit" variant="destructive">
                 <LogOut className="absolute left-3" /> Logout
               </Button>
               </form>
