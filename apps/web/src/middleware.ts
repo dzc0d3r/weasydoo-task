@@ -5,8 +5,18 @@ import {auth} from "@/auth"
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const session = await auth()
  
-  // If the user is authenticated, continue as normal
+  
   if (session) {
+    
+    if (request.nextUrl.pathname.startsWith('/dashboard')) {
+      
+      if (session.user.role === 'admin') {
+        return NextResponse.next()
+      } 
+        
+      return NextResponse.redirect(new URL('/', request.url))
+      
+    }
     return NextResponse.next()
   }
  

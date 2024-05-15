@@ -1,9 +1,10 @@
-import React from 'react'
 
-function Page() {
+
+export default function Page(): Promise<JSX.Element> {
+
+
   return (
     <div>Page</div>
   )
 }
 
-export default Page

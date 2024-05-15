@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { 
   CircleUser, AlignLeft, Search,
-  Shield , Settings,ShoppingCart,
+  Shield , Settings,
   LogOut}
 from "lucide-react"
 import { Button } from "@fakestore/ui/components/button"
@@ -17,7 +17,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@fakestore/ui/components/shee
 import Image from "next/image"
 import Logo from "../../../public/logo.png"
 import LoginButton from "./login-button"
+import Cart from "./cart"
 import { auth, signOut } from "@/auth"
+
 
 
 export default async function NaVBar(): Promise<JSX.Element> {
@@ -115,12 +117,8 @@ export default async function NaVBar(): Promise<JSX.Element> {
               />
             </div>
           </form>
-          <div className="relative flex items-center gap-4 flex-row">
-            <ShoppingCart />
-            <span className="absolute -top-3 -right-1 bg-red-500 rounded-full w-4 h-4 text-[.7rem] text-white font-medium flex items-center justify-center" >
-              1
-            </span>
-          </div>
+          <Cart />
+
           {session ? (
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -154,6 +152,9 @@ export default async function NaVBar(): Promise<JSX.Element> {
               action={async (): void =>  {
                     "use server";
                     await signOut();
+                    
+                    
+                    
                  }}
               >
               <Button className="w-full relative" size="sm" type="submit" variant="destructive">
