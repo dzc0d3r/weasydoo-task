@@ -24,7 +24,7 @@ function ProductImage({ product, fill }: ProductProps): JSX.Element {
               : "scale-100 blur-0 grayscale-0"
           }}`}
           fill
-          onLoadingComplete={() => { setLoading(false); }}
+          onLoad={() => { setLoading(false); }}
           src={product.image}
         />
       ) : (
@@ -36,7 +36,7 @@ function ProductImage({ product, fill }: ProductProps): JSX.Element {
               : "scale-100 blur-0 grayscale-0"
           }}`}
           height={1000}
-          onLoadingComplete={() => { setLoading(false); }}
+          onLoad={() => { setLoading(false); }}
           src={product.image}
           width={400}
         />

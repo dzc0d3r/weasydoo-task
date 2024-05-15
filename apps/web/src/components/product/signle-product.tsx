@@ -1,12 +1,14 @@
 import Link from "next/link";
 import type {Product} from "product"
 import ProductImage from "./product-image";
+import AdminActions from "./admin-actions";
 
 interface ProductProps {
   product: Product;
 };
 
 function SingleProduct({ product }: ProductProps): JSX.Element {
+
   return (
     <Link
       className="h-96 flex flex-col p-5 rounded border group hover:scale-105 transition-transform ease-out duration-200"
@@ -20,6 +22,8 @@ function SingleProduct({ product }: ProductProps): JSX.Element {
         <p className="w-44 truncate">{product.title}</p>
         <p>${product.price}</p>
       </div>
+      <AdminActions productID={product.id} />
+      
 
       <p className="italic text-xs mx-w-58 line-clamp-2 text-gray-600">
         {product.description}
