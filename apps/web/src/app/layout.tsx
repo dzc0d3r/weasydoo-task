@@ -4,7 +4,9 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Slide, ToastContainer } from "react-toastify";
 import  NavBar  from "@/components/navbar/nav-bar";
+import "react-toastify/dist/ReactToastify.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +28,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
+          <ToastContainer
+                    autoClose={3000}
+                    closeOnClick
+                    draggable
+                    hideProgressBar={false}
+                    newestOnTop
+                    pauseOnFocusLoss
+                    pauseOnHover
+                    position='top-right'
+                    toastClassName=' p-3 space-x-2 w-full'
+                    transition={Slide}
+                />
           <NavBar />
           {children}
           {login}

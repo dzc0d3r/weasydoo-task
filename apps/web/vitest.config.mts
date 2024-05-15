@@ -10,6 +10,7 @@ export default defineConfig({
     },
     alias: {
       '@/': new URL('./src/', import.meta.url).pathname, 
+      '~/': new URL('./', import.meta.url).pathname
     }
   },
 

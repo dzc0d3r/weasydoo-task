@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@fakestore/ui/components/button";
+import {Store} from "lucide-react"
 import SingleProduct from "@/components/product";
 import HeroImage from "~/public/hero.png"
 
@@ -21,6 +22,7 @@ export default async function Home(): Promise<JSX.Element> {
             <SingleProduct key={product.id} product={product} />
           ))}
         </div>
+
       </section>
     </main>
   );
@@ -36,7 +38,8 @@ export function HeroSection(): JSX.Element {
             Whether you&apos;re dressing up for a special event or keeping it casual,
             we have the styles you need to look and feel your best.any occasion with our latest collection.</p>
                 <Link className="mt-5  flex flex-row items-center" href="/products">
-                  <Button className="p-7 font-bold text-xl" size="default">Shop Now</Button>
+                  <Button className="py-7 flex flex-row  gap-7 font-medium text-xl" size="default">Shop Now <Store/>
+                  </Button>
                 </Link>
             </div>
             <div className="lg:w-1/3">

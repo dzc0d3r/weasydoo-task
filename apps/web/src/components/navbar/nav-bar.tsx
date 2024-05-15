@@ -20,11 +20,11 @@ import LoginButton from "./login-button"
 import { auth, signOut } from "@/auth"
 
 
-
 export default async function NaVBar(): Promise<JSX.Element> {
  
   
   const session = await auth()
+
   
   return (
       <header className="sticky backdrop-blur-lg bg-white backdrop-filter  bg-opacity-80 top-0 shadow-sm flex h-16 items-center gap-4 px-4 md:px-6 z-50">

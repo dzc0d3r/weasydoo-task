@@ -16,6 +16,7 @@ import {
 } from "@fakestore/ui/components/form"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
+import { toast } from "react-toastify"
 
 interface LoginFormProps {
   closeModal?: () => void,
@@ -42,12 +43,25 @@ export default function LoginForm({ closeModal }: LoginFormProps): JSX.Element {
 
   async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
     
-    await signIn("credentials", {
+    const login = await signIn("credentials", {
       username: values.username,
       password: values.password,
-      callbackUrl: redirectTo || "/",
+      callbackUrl: redirectTo,
+      redirect: false,
          
     })
+    if (login?.error === "CredentialsSignin") {
+      toast.error("Don't know you 🤪")
+    } else {
+      await signIn("credentials", {
+      username: values.username,
+      password: values.password,
+      callbackUrl: redirectTo,  
+      })
+      toast.success(`Welcome back, ${values.username}!`)
+    }
+
+
     
     
   }
