@@ -1,31 +1,88 @@
-# Another Page
+---
+title: Tech Stack
+---
 
-```js filename="demo.js" {3} copy
-let a = 1;
+The Tech stack
+In this document, we'll explain the technology stack choices made for our project, including TurboRepo, ESLint, TypeScript, Husky, lint-staged, NextAuth, Tailwind CSS, our shared UI library, Vite, Jest, GitHub Actions, and possible enhancements like adding Docker.
 
-console.log(a);
-```
+## TurboRepo (Monorepo)
 
-## Component
+TurboRepo is a monorepo management tool that allows us to organize multiple projects within a single repository. We chose TurboRepo for several reasons:
 
-import { useState } from 'react'
+- **Code Organization**: TurboRepo enables us to organize our projects, such as web, docs, and mobile apps, in a single repository, making it easier to manage dependencies and share code.
+- **Simplified Development**: With a monorepo structure, developers can work on multiple projects simultaneously and share common tooling and configuration.
 
-{/* Import CSS modules */}
-import styles from '../components/counters.module.css'
+## ESLint
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+ESLint is a widely used JavaScript and TypeScript linter that helps maintain code quality and enforce coding standards. We chose ESLint for the following reasons:
 
-<Counter/>
+- **Code Consistency**: ESLint ensures consistent code formatting and style across all projects, leading to cleaner and more maintainable codebases.
+- **Error Prevention**: ESLint helps catch common programming errors and potential bugs early in the development process, reducing the likelihood of introducing bugs into production.
 
-## External Component
+## TypeScript
 
-import Counters from '../components/counters'
+TypeScript is a statically typed superset of JavaScript that enhances code quality and developer productivity. We chose TypeScript for the following reasons:
 
-<Counters />
+- **Type Safety**: TypeScript provides static type checking, which helps identify and prevent type-related errors during development, leading to more robust and reliable code.
+- **Enhanced Tooling**: TypeScript offers advanced tooling support, including code intelligence, refactoring tools, and better IDE integration, improving developer productivity.
+
+## Husky and lint-staged
+
+Husky and lint-staged are tools used for setting up Git hooks and running tasks on staged files. We chose them for the following reasons:
+
+- **Automated Code Quality Checks**: Husky allows us to automate code quality checks and enforce code standards by running ESLint and other tasks before committing code changes.
+- **Preventing Bad Commits**: lint-staged ensures that only linted files are staged for commit, preventing developers from committing code that doesn't meet our coding standards.
+
+## NextAuth
+
+NextAuth is an authentication library for Next.js applications that provides built-in support for various authentication providers. We chose NextAuth for the following reasons:
+
+- **Ease of Integration**: NextAuth simplifies the integration of authentication providers such as OAuth, JWT, and others, reducing development time and complexity.
+- **Flexibility**: NextAuth offers flexibility in choosing authentication providers and configuring authentication flows, making it suitable for a wide range of applications.
+
+## Tailwind CSS
+
+Tailwind CSS is a utility-first CSS framework that allows us to quickly build custom designs without writing custom CSS. We chose Tailwind CSS for the following reasons:
+
+- **Rapid Prototyping**: Tailwind CSS enables rapid prototyping by providing a set of pre-designed utility classes that can be used to style components and layouts without writing CSS from scratch.
+- **Scalability**: Tailwind CSS scales well with large codebases and design systems, making it suitable for projects of any size.
+
+## Shared UI Library
+
+In our repository, we have a shared UI library (uses shadcn under the hood which laverag radix), this shared library contains reusable components and styles shared across multiple projects. We chose to create a shared UI library for the following reasons:
+
+- **Consistency**: A shared UI library ensures consistency in design and user experience across all projects, reducing design inconsistencies and improving overall brand identity.
+- **Code Reusability**: By centralizing UI components and styles in a shared library, we can reuse code across multiple projects, saving development time and effort.
+
+## Vitest
+
+Vitest is a next generation testing framework powered by Vite.
+
+- **Instantaneous Test Runtimes**: Gone are the days of waiting minutes for your tests to finish. Vitest utilizes Vite’s lightning-fast compilation and caching, resulting in test runs that are orders of magnitude faster than traditional frameworks.
+- **Seamless HMR for Tests**: Watch your test results update in real-time as you code! Vitest’s HMR for tests enables a fluid, iterative development loop. Make a change, see the test result instantly, and refine your code with lightning speed.
+- **Shared Configuration**: No more separate configurations for dev and test! Vitest uses the same vite.config.js file, eliminating the need for duplicate effort and ensuring consistency across your development cycle.
+
+## Jest (for expo)
+
+Jest is a JavaScript testing framework that makes testing enjoyable. We chose Jest for the following reasons:
+
+- **Easy Setup**: Jest provides a simple and easy-to-use testing framework with built-in test runners and assertion libraries, making it easy to write and run tests.
+- **Comprehensive Testing**: Jest supports a wide range of testing features, including unit tests, integration tests, and snapshot testing, allowing us to thoroughly test our codebase.
+
+## GitHub Actions
+
+GitHub Actions is a CI/CD platform that automates software workflows. We chose GitHub Actions for the following reasons:
+
+- **Seamless Integration**: GitHub Actions integrates seamlessly with our GitHub repository, allowing us to automate build, test, and deployment workflows directly within our repository.
+- **Flexibility**: GitHub Actions provides a flexible and customizable workflow configuration, allowing us to tailor our CI/CD pipeline to our specific requirements.
+
+## Adding Docker
+
+Docker is a containerization platform that allows us to package our applications and dependencies into portable containers. We chose Docker for the following reasons:
+
+- **Consistent Development Environment**: Docker ensures consistent development environments across different machines, reducing compatibility issues and improving developer productivity.
+- **Simplified Deployment**: Docker containers can be easily deployed to any environment that supports Docker, making it easier to deploy our applications to production and other environments.
+
+---
+
+By leveraging TurboRepo, ESLint, TypeScript, Husky, lint-staged, NextAuth, Tailwind CSS, our shared UI library, Vite, Jest, GitHub Actions, and Docker, we aim to build scalable, maintainable, and high-quality software that meets the needs of our users and stakeholders.
