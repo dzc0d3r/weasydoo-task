@@ -31,6 +31,7 @@ pnpm install
 ```bash
 pnpm docs:dev
 ```
+visit [localhost:3001](http://localhost:3001)
 
 ---
 
