@@ -15,7 +15,7 @@ Before getting started, ensure you have the following installed on your system:
 1. Clone this repository to your local machine:
 
 ```bash
-npm install -g turbo #or pnpm install -g turbo
+pnpm install -g turbo #or pnpm install -g turbo
 git clone https://github.com/dzc0d3r/weasydoo-task
 cd weasydoo-task
 ```
@@ -24,8 +24,6 @@ cd weasydoo-task
 
 ```bash
 pnpm install
-# or
-npm install
 ```
 
 ## Running Projects
@@ -45,8 +43,6 @@ To run the web app in development mode:
 pnpm web:dev
 # or
 pnpm --filter web dev
-# using npm
-npm run web:dev
 ```
 
 To build the web app for production start the app:
@@ -56,8 +52,6 @@ To build the web app for production start the app:
 pnpm web:build
 # or
 pnpm --filter web build
-# using npm
-npm run web:build
 ```
 
 To run production build
