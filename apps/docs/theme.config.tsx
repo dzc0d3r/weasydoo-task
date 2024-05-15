@@ -1,8 +1,9 @@
 import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import type { DocsThemeConfig } from 'nextra-theme-docs'
+import Image from "next/image"
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
+  logo: <p style={{fontSize: 24, display: 'flex', alignItems: 'center', gap: 8}}><Image alt="logo" height={40} src="/logo.png" width={40}/>FakeStore</p>,
   project: {
     link: 'https://github.com/shuding/nextra-docs-template',
   },
@@ -11,7 +12,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'FakeStore Docs',
   },
 }
 
