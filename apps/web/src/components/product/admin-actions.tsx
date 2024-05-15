@@ -5,7 +5,7 @@ import { Button } from "@fakestore/ui/components/button"
 import { Pencil, Trash2 } from "lucide-react"
 
 interface AdminActionProps {
-    productID: string
+    productID: number
 }
 
 export default function AdminAction({ productID }: AdminActionProps): JSX.Element {
