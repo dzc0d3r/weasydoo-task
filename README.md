@@ -1,58 +1,155 @@
-# Turborepo Tailwind CSS starter
+# Weasydoo task Monorepo Project
 
-This is an official starter Turborepo.
+This repository is a monorepo managed with TurboRepo, containing multiple projects for web, docs, and mobile apps for consuming [fakestore api](https://fakestoreapi.com/docs) and building a web app using [Next.js](https://nextjs.org) and a mobile app using [react native](https://reactnative.dev).
 
-## Using this example
+## Prerequisites
 
-Run the following command:
+Before getting started, ensure you have the following installed on your system:
 
-```sh
-npx create-turbo@latest -e with-tailwind
+- [Node.js](https://nodejs.org/) version >= 18
+- [PNPM package manager](https://pnpm.io/) version 8.9.0
+- [TurboRepo](https://turbo.build/repo) (`npm install -g turbo`)
+
+## Installation
+
+1. Clone this repository to your local machine:
+
+```bash
+npm install -g turbo #or pnpm install -g turbo
+git clone https://github.com/dzc0d3r/weasydoo-task
+cd weasydoo-task
 ```
 
-## What's inside?
+2. Install dependencies for all projects:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@fakestore/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@fakestore/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.js`. This was chosen for several reasons:
-
-- Make sharing one `tailwind.config.js` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.js` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
+```bash
+pnpm install
+# or
+npm install
 ```
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+## Running Projects
 
-### Utilities
+### To run all apps at once:
 
-This Turborepo has some additional tools already setup for you:
+```bash
+turbo dev
+```
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Web App
+
+To run the web app in development mode:
+
+```bash
+# using pnpm
+pnpm web:dev
+# or
+pnpm --filter web dev
+# using npm
+npm run web:dev
+```
+
+To build the web app for production start the app:
+
+```bash
+# using pnpm
+pnpm web:build
+# or
+pnpm --filter web build
+# using npm
+npm run web:build
+```
+
+To run production build
+
+```bash
+export AUTH_URL=http://localhost:3000; pnpm web:start
+```
+
+```bash
+export AUTH_URL=http://localhost:3000; pnpm --filter web start
+```
+
+### Docs
+
+To run the documentation site in development mode:
+
+```bash
+pnpm docs:dev
+```
+
+To build the documentation site for production:
+
+```bash
+pnpm docs:build
+```
+
+### Mobile App
+
+To run the mobile app in development mode:
+
+```bash
+pnpm mobile:dev
+```
+
+To build the mobile app for production:
+
+```bash
+pnpm mobile:build
+```
+
+### Mobile App (Android)
+
+To run the mobile app on Android:
+
+```bash
+pnpm mobile:android
+```
+
+### Mobile App (iOS)
+
+To run the mobile app on iOS:
+
+```bash
+pnpm mobile:ios
+```
+
+## Additional Commands
+
+- **Linting**: Run linting for all projects:
+
+```bash
+pnpm lint
+```
+
+- **Type Checking**: Run type checking for all projects:
+
+```bash
+pnpm type-check
+```
+
+- **Formatting**: Format code using Prettier:
+
+```bash
+pnpm format
+```
+
+- **Cleaning**: Clean build artifacts:
+
+```bash
+pnpm clean
+```
+
+- **Unit Testing**: Run unit tests for the mobile app:
+
+```bash
+pnpm mobile:test
+```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

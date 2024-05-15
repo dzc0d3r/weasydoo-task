@@ -18,9 +18,9 @@ function SingleProduct({ product }: ProductProps): JSX.Element {
     > 
       <div className="absolute top-0 z-10">
         <AdminActions productID={product.id} />
-      <UserActions product={product} />
+        <UserActions product={product} />
       </div>
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/products/${product.id}`}>
         
         <div className="relative h-72 max-h-72">
           <ProductImage fill product={product} />

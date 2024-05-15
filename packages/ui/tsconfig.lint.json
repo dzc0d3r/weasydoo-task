@@ -1,7 +1,11 @@
 {
   "extends": "@fakestore/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["components", "lib", "turbo"],
   "exclude": ["node_modules", "dist"]

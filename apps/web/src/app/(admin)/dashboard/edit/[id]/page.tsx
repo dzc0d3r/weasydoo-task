@@ -1,6 +1,6 @@
 
 
-export default function Page(): Promise<JSX.Element> {
+export default function Page(): React.JSX.Element {
 
 
   return (

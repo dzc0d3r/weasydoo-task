@@ -149,7 +149,7 @@ export default async function NaVBar(): Promise<JSX.Element> {
               <DropdownMenuSeparator />
               <form
               
-              action={async (): void =>  {
+              action={async (): Promise<undefined> =>  {
                     "use server";
                     await signOut();
                     

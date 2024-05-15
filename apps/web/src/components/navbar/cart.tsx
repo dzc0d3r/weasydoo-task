@@ -1,5 +1,5 @@
 "use client"
-import { useContext } from 'react'
+import { useContext ,useState, useEffect} from 'react'
 import { ShoppingCart } from "lucide-react"
 import { Button } from "@fakestore/ui/components/button"
 import {
@@ -12,16 +12,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@fakestore/ui/components/sheet"
+import type { CartItem } from "@/providers/cart-provider";
 import { CartContext } from "@/providers/cart-provider"
-
 
 export default function Cart(): JSX.Element {
   const {cartItems} = useContext(CartContext);
 
+  const [itemsInCart, setItemsInCart] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    
+     setItemsInCart(cartItems)
+    
+  }, [cartItems])
   
-  
-  
-  
+
   return (
 
     <div className="relative flex items-center gap-4 flex-row">
@@ -30,12 +35,10 @@ export default function Cart(): JSX.Element {
       <SheetTrigger asChild>
         <div className="hover:cursor-pointer">
           <ShoppingCart />
-          {cartItems.length > 0
-           && (
+          {itemsInCart.length > 0 && (
             <span className="absolute -top-3 -right-1 bg-red-500 rounded-full w-4 h-4 text-[.7rem] text-white font-medium flex items-center justify-center" >
-            {cartItems.length}
+            {itemsInCart.length || null}
           </span>
-        
           )} 
         </div>
       </SheetTrigger>

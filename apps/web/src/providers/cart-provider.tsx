@@ -26,7 +26,7 @@ export const CartContext = createContext({} as CartContextValue);
 
 export function CartProvider ({ children } : CartProviderProps): React.JSX.Element {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCartItems = localStorage.getItem('cartItems');
+    const storedCartItems = typeof localStorage !== 'undefined' ? localStorage.getItem('cartItems') : null;
     return storedCartItems ? (JSON.parse(storedCartItems) as CartItem[]) : [];
   });
 

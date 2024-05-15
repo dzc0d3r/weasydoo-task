@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "web:dev": "turbo dev --scope=web",
     "web:build": "turbo build --scope=web",
+    "web:start": "turbo start --scope=web",
     "docs:dev": "turbo dev --scope=docs",
     "docs:build": "turbo build --scope=docs",
     "mobile:dev": "turbo dev --scope=mobile",

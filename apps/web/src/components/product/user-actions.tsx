@@ -11,7 +11,7 @@ interface AdminActionProps {
     
 }
 
-export default function UserActions({ product }: AdminActionProps): JSX.Element {
+export default function UserActions({ product }: AdminActionProps): React.JSX.Element {
    const {addToCart} = useContext(CartContext)
    const session = useSession()
 
